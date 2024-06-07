@@ -1,0 +1,12 @@
+{
+  "name": "Shareleads",
+  "description": "Shareleads is a module for the Shareablee platform that allows users to create and manage leads.",
+  "type": "module",
+  "version": "0.0.136",
+  "dependencies": {
+    "system": {
+      "type": "SAE",
+      "version": "4.12.0"
+    }
+  }
+}

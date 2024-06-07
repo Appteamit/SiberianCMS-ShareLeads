@@ -1,0 +1,136 @@
+<!-- admin -->
+<div class="row" ng-if="!is_loading">
+  <button
+    class="button button-block button-light button-light-custom"
+    style="
+      background: black;
+      color: white;
+      font-weight: bold;
+      font-size: large;
+      padding: 10px;
+    "
+  >
+    {{ ::"Available Points:" | translate:"shareleads" }} {{
+    shareleads.balance.balance_points }}
+  </button>
+</div>
+<div class="row mb-15">
+  <div
+    class="col pointer energized-bg energized-bg-custom"
+    style="
+      background: #eeeeee;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+    "
+    ng-click="navigateTo('shareleads-subscribers')"
+  >
+    <div class="preview-main separator1">
+      <span
+        class="ion-person-add energized energized-custom"
+        style="font-size: 9.5em; color: black"
+      ></span>
+    </div>
+    <div class="preview-footer energized energized-custom" style="color: black">
+      <span class="preview-footer-text"
+        >{{ ::"Subscribers" | translate:"shareleads" }}</span
+      >
+    </div>
+  </div>
+</div>
+<div class="row mb-15">
+  <div
+    class="col pointer assertive-bg assertive-bg-custom"
+    style="
+      background: #eeeeee;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+    "
+    ng-click="navigateTo('shareleads-share')"
+  >
+    <div class="preview-main separator2">
+      <span
+        class="ion-person-stalker assertive assertive-custom"
+        style="font-size: 9.5em; color: black"
+      ></span>
+    </div>
+    <div class="preview-footer assertive assertive-custom" style="color: black">
+      <span class="preview-footer-text"
+        >{{ ::"Invitations" | translate:"shareleads" }}</span
+      >
+    </div>
+  </div>
+</div>
+<div class="row mb-15">
+  <div
+    class="col pointer royal-bg royal-bg-custom"
+    style="
+      background: #eeeeee;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+    "
+    ng-click="navigateTo('shareleads-shop')"
+  >
+    <div class="preview-main separator3">
+      <span
+        class="ion-bag royal royal-custom"
+        style="font-size: 9.5em; color: black"
+      ></span>
+    </div>
+    <div class="preview-footer royal royal-custom" style="color: black">
+      <span class="preview-footer-text"
+        >{{ ::"Shop" | translate:"shareleads" }}</span
+      >
+    </div>
+  </div>
+</div>
+<div class="row mb-15" ng-click="navigateTo('shareleads-transactions')">
+  <div
+    class="col pointer balanced-bg balanced-bg-custom"
+    style="
+      background: #eeeeee;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+    "
+  >
+    <div class="preview-main separator4">
+      <span
+        class="ion-arrow-swap balanced balanced-custom"
+        style="font-size: 9.5em; color: black"
+      ></span>
+    </div>
+    <div class="preview-footer balanced balanced-custom" style="color: black">
+      <span class="preview-footer-text"
+        >{{ ::"Transactions" | translate:"shareleads" }}</span
+      >
+    </div>
+  </div>
+</div>
+<div class="row mb-15">
+  <div
+    class="col pointer positive-bg positive-bg-custom"
+    style="
+      background: #eeeeee;
+      color: black;
+      font-weight: bold;
+      border-radius: 5px;
+    "
+    ng-click="navigateTo('shareleads-myproducts')"
+  >
+    <div class="preview-main separator5">
+      <span
+        class="ion-briefcase positive positive-custom"
+        style="font-size: 9.5em; color: black"
+      ></span>
+    </div>
+    <div class="preview-footer positive positive-custom" style="color: black">
+      <span class="preview-footer-text"
+        >{{ ::"My Products" | translate:"shareleads" }}</span
+      >
+    </div>
+  </div>
+</div>
+<!-- admin end -->

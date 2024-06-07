@@ -1,0 +1,50 @@
+<ion-view class="shareleads-shop l1" sb-page-background cache-view="false">
+    <ion-nav-title class="title title-center">
+        {{ ::shareleads.page_title | translate:"shareleads" }}
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!-- Right button content goes here -->
+        <!-- <button type="button" class="button button-icon icon ion-person-add" ng-click="navigateTo('shareleads-invitation')">
+        </button> -->
+    </ion-nav-buttons>
+    <ion-content class="shareleads">
+        <!-- <ion-refresher ng-show="is_logged_in" pulling-text="{{ ::'Pull to refresh...' | translate:'shareleads' }}" on-refresh="loadContent(true)"></ion-refresher> -->
+
+        <div class="card" ng-show="!is_logged_in">
+            <div class="item item-text-wrap padding-0">
+                <p class="text-center font-weight-bold">{{ ::"You must be logged in to use this feature." | translate:"shareleads" }}</p>
+                <div class="button-bar bar-stable m-top-10">
+                    <a class="button" ng-click="loginModalMP();">{{ ::"Click here to login" | translate:"shareleads" }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="list list-inset" style="margin-bottom: 0px;" ng-if="!is_loading && is_logged_in">
+			<label class="item item-input item-custom">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" ng-model="filter.search" placeholder="{{ ::'Search...' | translate:'shareleads' }}">
+			</label>
+		</div>
+		  <div class="row" ng-repeat="shop in shops">
+            <div class="col col-50" ng-repeat="product in shop | filter:filter.search" ng-click="shopDetails(product.product_id)">
+            <div class="list card" ng-if="product" style="margin: 0px;">
+                <div class="item item-body item-custom">
+                <img class="item-image" ng-src="{{product.product_img}}">
+                <h3>{{product.product_name}}</h3>
+                <p><a href="#" class="subdued">{{product.product_points}}</a></p>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+
+
+		<div style="margin-bottom: 30px;"></div>
+    </ion-content>
+	<style>
+		.item-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px; /* Adjust the max-height as needed */
+        }
+	</style>
+</ion-view>

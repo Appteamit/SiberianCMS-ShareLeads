@@ -1,0 +1,1836 @@
+<?php
+//complete application object
+$application = $this->getApplication();
+$gmapsKey = $application->getGooglemapsKey();
+//app id property from application object
+$app_id      = $application->getId();
+
+//complete option/feature object
+$option   = $this->getOptionValue();
+//value id property option value object
+$value_id = $option->getId();
+// base-url
+$default  = new Core_Model_Default();
+$base_url  = $default->getBaseUrl();
+
+$setting = new Shareleads_Model_Setting();
+$setting->find(1);
+
+$clients = (new Shareleads_Model_User())->findAll([
+    'app_id' => $app_id,
+    'value_id' => $value_id,
+    'user_is_admin' => 0
+],['user_name ASC']);
+$custom_text = (new Shareleads_Model_Share())->find([
+    'app_id' => $app_id,
+    'value_id' => $value_id
+]);
+?>
+
+<!-- <p>
+    <a href="<?php //echo !empty($setting->getHelpUrl()) ? $setting->getHelpUrl() : '';?>" target="_blank"
+        class="link-help color-blue btn">
+        <i class="fa fa-product-circle"></i>
+    </a>
+</p> -->
+<div id="zeltalicense" class="module-zeltalicense">
+    <div class="navbar-btn btn-sm"></div>
+    <ul class="nav nav-tabs custome_nav" role="tablist">
+
+        <li role="presentation" class='active'>
+            <a href="#tab_products" aria-controls="tab_products" role="tab" data-toggle="tab">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <span class="hidden-xs option"><?php echo p__("shareleads",'Product'); ?></span>
+            </a>
+        </li>
+        <li role="presentation" class=''>
+            <a href="#tab_user" aria-controls="tab_user" role="tab" data-toggle="tab">
+
+                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                <span class="hidden-xs option">
+                    <?php echo p__("shareleads",'Agent'); ?>
+                </span>
+            </a>
+        </li>
+        <li role="presentation" class=''>
+            <a href="#tab_contracts" aria-controls="tab_contracts" role="tab" data-toggle="tab">
+                <i class="fa fa-file" aria-hidden="true"></i>
+                <span class="hidden-xs option">
+                    <?php echo p__("shareleads",'Upload Contracts'); ?>
+                </span>
+
+            </a>
+        </li>
+        <li role="presentation" class=''>
+            <a href="#tab_global_settings" aria-controls="tab_global_settings" role="tab" data-toggle="tab">
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                <span class="hidden-xs option">
+                    <?php echo p__("shareleads",'Notification'); ?>
+                </span>
+
+            </a>
+        </li>
+        <li role="presentation" class=''>
+            <a href="#custom_share_text" aria-controls="custom_share_text" role="tab" data-toggle="tab">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <span class="hidden-xs option">
+                    <?php echo p__("shareleads",'Settings'); ?>
+                </span>
+
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#tab_background" aria-controls="tab_background" role="tab" data-toggle="tab">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+                <span class="hidden-xs option">
+                    <?php echo p__("shareleads",'Background'); ?>
+                </span>
+
+
+            </a>
+        </li>
+
+
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="tab_background">
+            <?php echo $this->importBackground($option); ?>
+        </div>
+
+
+        <div role="tabpanel" class="tab-pane active" id="tab_products">
+            <h3 class="title-editor no-border-radius title-feature-indent">
+                <?php echo p__("shareleads",'Product'); ?>
+            </h3>
+            <button type="button" class="btn default_button color-blue pull-right"
+                style="position: relative;top: -33px;right: 1px;"
+                onclick="editProduct()"><?php echo p__("shareleads",'Add Product'); ?></button>
+            <div class="container-fluid content-feature">
+                <!-- product form -->
+                <form id="product_form" method="post" style="display: none;"
+                    action="<?php echo $this->getUrl('shareleads/product/save-product'); ?>">
+                    <input type="hidden" name="value_id" value="<?php echo $option->getId(); ?>" />
+                    <div style="margin-top:10px; display: block;" id="product_section">
+                        <p class="heading product_form_title" id="para-new-group">
+                            <?php echo p__("shareleads",'Add Product'); ?></p>
+                        <button type="button" class="btn btn-info" id="show_all_products_btn"
+                            style="margin-top: 10px;margin-bottom: 25px;"><?php echo p__("shareleads",'Back'); ?></button>
+                        <button class="btn btn-info" id="" type="submit"
+                            style="margin-top: 10px;margin-bottom: 25px;float: right;"><?php echo p__("shareleads",'Save'); ?></button>
+
+
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Name'); ?>*</div>
+                            <div class="col-sm-8">
+                                <input type="text" name="product_name" class="input-flat" id="product_name" />
+                                <input type="hidden" name="product_id" value="" class="input-flat" id="product_id" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Points'); ?>*</div>
+                            <div class="col-sm-8">
+                                <input type="number" name="product_points" class="input-flat" id="product_points" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Start At'); ?></div>
+                            <div class="col-sm-8">
+                                <input type="text" name="product_start_at" class="input-flat datepicker"
+                                    id="product_start_at" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Expire At'); ?></div>
+                            <div class="col-sm-8">
+                                <input type="text" name="product_expire_at" class="input-flat datepicker"
+                                    id="product_expire_at" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Enable/Disable'); ?></div>
+                            <div class="col-sm-8">
+                                <select id="product_status" class="no-dk styled-select color-blue"
+                                    name="product_status">
+                                    <option value="1"><?php echo p__("shareleads",'Enabled'); ?></option>
+                                    <option value="0"><?php echo p__("shareleads",'Disabled'); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Cover Image'); ?></div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <div class="">
+                                        <button id="upload_product_img_btn" type="button"
+                                            class="btn btn-block color-blue">
+                                            <i class="icon-camera-retro"></i>
+                                            <?php echo p__("shareleads",'Picture'); ?>
+                                        </button>
+                                        <input id="tmp_product_img" class="uploader" style="display:none" type="file"
+                                            name="files[]"
+                                            data-url="<?php echo $this->getUrl('template/crop/upload'); ?>">
+                                        <img id="show_product_img" style="display:none;width: 100%;" />
+                                        <!-- <a href="" style="display:none;" id="remove_product_img" class="btn color-blue">
+                                            <i class="fa fa-times"></i>
+                                        </a> -->
+                                        <input type="hidden" id="product_img" name="product_img" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Description'); ?></div>
+                            <div class="col-sm-8">
+                                <textarea type="text" name="product_description" class="input-flat ckedit"
+                                    id="product_description" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <!-- product form end -->
+
+
+
+
+                    </div>
+                </form>
+                <table id="table_product" class="table table-bordered display responsive nowrap content-white-bkg"
+                    style="width:100%; margin-top:12px;">
+                    <thead>
+                        <tr class="border-grey">
+                            <th><?php echo p__("shareleads",'UID'); ?></th>
+                            <th><?php echo p__("shareleads",'Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Start At'); ?></th>
+                            <th><?php echo p__("shareleads",'Expire At'); ?></th>
+                            <th><?php echo p__("shareleads",'Points'); ?></th>
+                            <th><?php echo p__("shareleads",'Redeemed Count'); ?></th>
+                            <th><?php echo p__("shareleads",'Action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab_user">
+            <h3 class="title-editor no-border-radius title-feature-indent">
+                <?php echo p__("shareleads",'Agents'); ?>
+            </h3>
+            <button type="button" class="btn default_button color-blue pull-right" onclick="editAgent()"
+                style="position: relative;top: -33px;right: 1px;"><?php echo p__("shareleads",'Add Agent'); ?></button>
+            <div class="container-fluid content-feature">
+                <!-- agent form -->
+                <form id="agent_form" method="post" style="display: none;"
+                    action="<?php echo $this->getUrl('shareleads/user/save-agent'); ?>">
+                    <input type="hidden" name="value_id" value="<?php echo $option->getId(); ?>" />
+                    <div style="margin-top:10px; display: block;" id="product_section">
+                        <p class="heading product_form_title" id="para-new-group">
+                            <?php echo p__("shareleads",'Add Agent'); ?></p>
+                        <button type="button" class="btn btn-info" id="show_all_agents_btn"
+                            style="margin-top: 10px;margin-bottom: 25px;"><?php echo p__("shareleads",'Back'); ?></button>
+                        <button class="btn btn-info" id="" type="submit"
+                            style="margin-top: 10px;margin-bottom: 25px;float: right;"><?php echo p__("shareleads",'Save'); ?></button>
+
+
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Choose User to set as Agent'); ?>*</div>
+                            <div class="col-sm-8">
+                                <select id="agent_user_id" class="no-dk styled-select color-blue" name="user_id">
+                                    <option value=""><?php echo p__("shareleads",'Choose Client'); ?></option>
+                                    <?php foreach($clients as $client):?>
+                                    <option value="<?php echo $client->getUserId()?>">
+                                        <?php echo $client->getUserName() .' '. $client->getUserSurname();?></option>
+                                    <?php endforeach;?>
+                                </select>
+                                <!-- <input type="hidden" name="user_id" value="" class="input-flat" id="agent_user_id" /> -->
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Agent Type'); ?></div>
+                            <div class="col-sm-8">
+                                <select id="agent_type_id" class="no-dk styled-select color-blue" name="type_id">
+                                    <option value=""><?php echo p__("shareleads",'Choose type'); ?></option>
+                                    <option value="type-01"><?php echo p__("shareleads",'type 01'); ?></option>
+                                    <option value="type-02"><?php echo p__("shareleads",'type 02'); ?></option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Commission Points'); ?>*</div>
+                            <div class="col-sm-8">
+                                <input type="number" name="agent_commission_points" class="input-flat"
+                                    id="agent_commission_points" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Invitation Code (Unique)'); ?>*</div>
+                            <div class="col-sm-8">
+                                <input type="text" name="agent_invitation_code" class="input-flat"
+                                    id="agent_invitation_code" maxlength="6" />
+                            </div>
+                        </div>
+
+                        <!-- agent form end -->
+
+
+
+
+                    </div>
+                </form>
+                <!-- agent form end -->
+                <table id="table_user" class="table table-bordered display responsive nowrap content-white-bkg"
+                    style="width:100%; margin-top:12px;">
+                    <thead>
+                        <tr class="border-grey">
+                            <th><?php echo p__("shareleads",'Action'); ?></th>
+                            <th><?php echo p__("shareleads",'Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Surname'); ?></th>
+                            <th><?php echo p__("shareleads",'Email'); ?></th>
+                            <th><?php echo p__("shareleads",'Phone'); ?></th>
+                            <th><?php echo p__("shareleads",'Commission Points'); ?></th>
+                            <th><?php echo p__("shareleads",'Invitation Code (Unique)'); ?></th>
+                            <th><?php echo p__("shareleads",'Created At'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab_contracts">
+            <h3 class="title-editor no-border-radius title-feature-indent">
+                <?php echo p__("shareleads",'Upload Contracts'); ?>
+            </h3>
+            <button type="button" class="btn default_button color-blue pull-right"
+                style="position: relative;top: -33px;right: 1px;"
+                onclick="uploadContract()"><?php echo p__("shareleads",'Add Contract'); ?></button>
+            <div class="container-fluid content-feature">
+                <!-- agent -->
+                <form id="contractForm" method="post" style="display:none;"
+                    action="<?php echo $this->getUrl('shareleads/application/upload-contract') ?>"
+                    enctype="multipart/form-data">
+                    <input type="hidden" name="value_id" value="<?php echo $option->getId(); ?>" />
+                    <div style="margin-top:10px; display: block;" id="contract_section">
+                        <p class="heading" id="para-new-group">
+                            <?php echo p__("shareleads",'Add Contract'); ?></p>
+                        <button type="button" class="btn btn-info" id="show_all_contracts_btn"
+                            style="margin-top: 10px;margin-bottom: 25px;"><?php echo p__("shareleads",'Back'); ?></button>
+                        <button class="btn btn-info" id="" type="submit"
+                            style="margin-top: 10px;margin-bottom: 25px;float: right;"><?php echo p__("shareleads",'Save'); ?></button>
+
+
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Contract Title'); ?>*</div>
+                            <div class="col-sm-8">
+                                <input type="text" name="contract_title" class="input-flat" id="contract_title" />
+                                <input type="hidden" name="contract_id" value="" class="input-flat" id="contract_id" />
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Select Client'); ?>*</div>
+                            <div class="col-sm-8">
+                                <select id="contract_customer_id" class="no-dk styled-select color-blue searchable"
+                                    name="customer_id">
+                                    <option value=""><?php echo p__("shareleads",'Choose Client'); ?></option>
+                                    <?php foreach($clients as $client):?>
+                                    <option value="<?php echo $client->getCustomerId()?>">
+                                        <?php echo $client->getUserName() .' '. $client->getUserSurname();?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Contract File'); ?>(.PDF)*</div>
+                            <div class="col-sm-8">
+                                <input type="file" accept=".pdf" id="contract_pdf_url" name="contract_pdf_url"
+                                    title="<?php echo p__("shareleads",'Contract File (PDF)'); ?>"
+                                    class="required input-flat">
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 15px;">
+                            <div class="col-sm-4"><?php echo p__("shareleads",'Description'); ?></div>
+                            <div class="col-sm-8">
+                                <textarea type="text" name="contract_description" class="input-flat ckedit"
+                                    id="contract_description" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table id="table_contracts" class="table table-bordered display responsive nowrap content-white-bkg"
+                    style="width:100%; margin-top:12px;">
+                    <thead>
+                        <tr class="border-grey">
+                            <th><?php echo p__("shareleads",'UID'); ?></th>
+                            <th><?php echo p__("shareleads",'Client Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Contract Title'); ?></th>
+                            <th><?php echo p__("shareleads",'Created At'); ?></th>
+                            <th><?php echo p__("shareleads",'Action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <h3 class="title-editor no-border-radius title-feature-indent" id="para-clients">
+                    <?php echo p__("shareleads",'Clients List'); ?></h3>
+                <table id="table_clients" class="table table-bordered display responsive nowrap content-white-bkg"
+                    style="width:100%; margin-top:12px;">
+                    <thead>
+                        <tr class="border-grey">
+                            <th><?php echo p__("shareleads",'Action'); ?></th>
+                            <th><?php echo p__("shareleads",'Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Surname'); ?></th>
+                            <th><?php echo p__("shareleads",'Email'); ?></th>
+                            <th><?php echo p__("shareleads",'Phone'); ?></th>
+                            <th><?php echo p__("shareleads",'Agent Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Created At'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab_global_settings">
+            <h3 class="title-editor no-border-radius title-feature-indent">
+                <?php echo p__("shareleads",'Notification'); ?>
+            </h3>
+            <div class="container-fluid content-feature">
+                <form id="notification_setting_form" method="post"
+                    action="<?php echo $this->getUrl('shareleads/notification/save'); ?>">
+                    <div class="form-horizontal">
+
+                        <div id="">
+                            <h3 style="font-weight: bold;">
+                                <?php echo p__("shareleads",'Email notifications');?>
+                            </h3>
+                            <input type="hidden" name="value_id" value="<?php echo $option->getId(); ?>" />
+
+                            <div class="form-group">
+                                <div class="col-sm-4">
+                                    <?php echo p__("shareleads",'Enable Receiver'); ?></div>
+                                <div class="col-sm-8">
+                                    <!-- <span>
+
+                                        <input type="checkbox" name="notification_is_admin" id="notification_is_admin"
+                                            onClick="toggleContainer('section_notification_is_admin')"
+                                            style="margin-right: 5px;" value="1" is_form_horizontal="1"
+                                            class="sb-form-checkbox color-blue">
+                                        <label
+                                            for="notification_is_admin"><?php echo p__("shareleads",'Admin'); ?></label>
+                                    </span>
+                                    &nbsp;&nbsp;&nbsp; -->
+                                    <span>
+
+                                        <input type="checkbox" name="notification_is_agent" id="notification_is_agent"
+                                            onClick="toggleContainer('section_notification_is_agent')"
+                                            style="margin-right: 5px;" value="1" is_form_horizontal="1"
+                                            class="sb-form-checkbox color-blue">
+                                        <label
+                                            for="notification_is_agent"><?php echo p__("shareleads",'Agent'); ?></label>
+                                    </span>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <span>
+
+                                        <input type="checkbox" name="notification_is_client" id="notification_is_client"
+                                            value="1" checked="checked" is_form_horizontal="1"
+                                            onClick="toggleContainer('section_notification_is_client')"
+                                            style="margin-right: 5px;" class="sb-form-checkbox color-blue">
+                                        <label
+                                            for="notification_is_client"><?php echo p__("shareleads",'Client'); ?></label>
+                                    </span>
+
+                                </div>
+                            </div>
+                            <div id="section_notification_is_admin" style="display: none;">
+                                <div class="alert alert-info">
+                                    <p>
+                                        <?php echo p__('shareleads','Admin Template') ?>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4"><?php echo p__("shareleads",'Email Notification Title:'); ?>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="notification_admin_title" class="input-flat"
+                                            id="notification_admin_title" placeholder='' value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <?php echo p__("shareleads",'Email Notification Description:'); ?></div>
+                                    <div class="col-sm-8">
+                                        <textarea type="text" name="notification_admin_text" class="input-flat"
+                                            id="notification_admin_text" rows="5"></textarea>
+                                        <p id=""><?php echo '@@name@@ @@app_name@@';?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="section_notification_is_agent" style="display: none;">
+                                <div class="alert alert-info">
+                                    <p>
+                                        <?php echo p__('shareleads','Agent Template : The notification will be triggered when the client adds agents unique code') ?>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4"><?php echo p__("shareleads",'Email Notification Title:'); ?>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="notification_agent_title" class="input-flat"
+                                            id="notification_agent_title" placeholder='' value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <?php echo p__("shareleads",'Email Notification Description:'); ?></div>
+                                    <div class="col-sm-8">
+                                        <textarea type="text" name="notification_agent_text" class="input-flat ckedit"
+                                            id="notification_agent_text" rows="5"></textarea>
+                                        <p id=""><?php echo '@@name@@ @@app_name@@';?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="section_notification_is_client" style="display: none;">
+                                <div class="alert alert-info">
+                                    <p>
+                                        <?php echo p__('shareleads','Client Template : The notification will be triggered when new client wiil sign up') ?>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4"><?php echo p__("shareleads",'Email Notification Title:'); ?>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="notification_client_title" class="input-flat"
+                                            id="notification_client_title" placeholder='' value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <?php echo p__("shareleads",'Email Notification Description:'); ?></div>
+                                    <div class="col-sm-8">
+                                        <textarea type="text" name="notification_client_text" class="input-flat ckedit"
+                                            id="notification_client_text" rows="5"></textarea>
+                                        <p id=""><?php echo '@@name@@ @@app_name@@';?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-sm-12">
+                                    <input type="submit" name="" class="button btn bt_save color-blue pull-right" id=""
+                                        placeholder='' value="<?php echo p__("shareleads",'Save'); ?>">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <h3 class="title-editor no-border-radius title-feature-indent" id="para-clients">
+                <?php echo p__("shareleads",'Logs'); ?></h3>
+            <div class="container-fluid content-feature">
+                <table id="table_logs" class="table table-bordered display responsive nowrap content-white-bkg"
+                    style="width:100%; margin-top:12px;">
+                    <thead>
+                        <tr class="border-grey">
+                            <th><?php echo p__("shareleads",'UID'); ?></th>
+                            <th><?php echo p__("shareleads",'Name'); ?></th>
+                            <th><?php echo p__("shareleads",'Surname'); ?></th>
+                            <th><?php echo p__("shareleads",'Email'); ?></th>
+                            <th><?php echo p__("shareleads",'Subject'); ?></th>
+                            <th><?php echo p__("shareleads",'Sent To'); ?></th>
+                            <th><?php echo p__("shareleads",'Sent At'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="custom_share_text">
+            <h3 class="title-editor no-border-radius title-feature-indent">
+                <?php echo p__("shareleads",'Settings'); ?>
+            </h3>
+            <div class="container-fluid content-feature">
+                <form id="sharing_form" method="post"
+                    action="<?php echo $this->getUrl('shareleads/notification/sharetext'); ?>">
+                    <div class="form-horizontal">
+
+                        <div id="">
+                            <h3 style="font-weight: bold;">
+                                <?php echo p__("shareleads",'Customize share text');?>
+                            </h3>
+                            <input type="hidden" name="value_id" value="<?php echo $option->getId(); ?>" />
+
+                            <div class="form-group">
+                                <div class="col-sm-4">
+                                    <?php echo p__("shareleads",'Text'); ?></div>
+                                <div class="col-sm-8">
+                                    <textarea type="text" name="share_text" class="input-flat" id="share_text"
+                                        rows="5"><?php echo $custom_text->getShareText();?></textarea>
+                                    <p id=""><?php echo '@@app_name@@,@@app_link@@,@@agent_name@@, @@agent_code@@';?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-sm-12">
+                                    <input type="submit" name="" class="button btn bt_save color-blue pull-right" id=""
+                                        placeholder='' value="<?php echo p__("shareleads",'Save'); ?>">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ledger table modal -->
+<div id="leder_table_manager" class="custom_modal leder_table_manager" style="display:none;">
+    <div id="modal_mask_leder_table_manager" class="modal_mask close_modal close_modal_leder_table_manager">
+    </div>
+    <div>
+        <div id="leder_table" class="modal_content inner_content">
+            <span class="pull-right" style="margin-right: 8px;">
+                <button class="bt_close_modal_icons close_modal_leder_table_manager btn btn-danger" type="button">
+                    <i class="fa fa-times"></i>
+                </button>
+            </span>
+            <h3 class="title-editor border-blue no-border-radius text-center">
+                <?php echo p__("shareleads", 'Ledger Report'); ?>
+            </h3>
+            <div class="leder_table_details">
+                <div class="container-fluid content-color" style="padding-top: 20px;" id="leder-table-data">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ledger table modal -->
+<!-- client table modal -->
+<div id="client_table_manager" class="custom_modal client_table_manager" style="display:none;">
+    <div id="modal_mask_client_table_manager" class="modal_mask close_modal close_modal_client_table_manager">
+    </div>
+    <div>
+        <div id="client_table" class="modal_content inner_content">
+            <span class="pull-right" style="margin-right: 8px;">
+                <button class="bt_close_modal_icons close_modal_client_table_manager btn btn-danger" type="button">
+                    <i class="fa fa-times"></i>
+                </button>
+            </span>
+            <h3 class="title-editor border-blue no-border-radius text-center">
+                <?php echo p__("shareleads", 'Client List'); ?>
+            </h3>
+            <div class="client_table_details">
+                <div class="container-fluid content-color" style="padding-top: 20px;" id="client-table-data">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /client table modal -->
+<link rel="stylesheet"
+    href="<?php echo $this->getUrl("/app/local/modules") . '/Shareleads/resources/design/desktop/flat/DataTables/';?>datatables.min.css">
+
+<script
+    src="<?php echo $this->getUrl("/app/local/modules") . '/Shareleads/resources/design/desktop/flat/DataTables/';?>datatables.min.js">
+</script>
+
+<style type="text/css" media="screen">
+.error {
+    color: red;
+    text-align: center;
+}
+
+#form-cms {
+    padding-top: 15px;
+}
+
+#form-cms {
+    padding-top: 15px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+
+.mb-10 {
+    margin-bottom: 20px;
+}
+
+#shareleads_warning_expiration_btn_cancel {
+    display: none;
+}
+
+.border {
+    padding: 15px;
+    border: 1px solid;
+}
+
+.red-color {
+    color: red;
+}
+
+.pt30 {
+    padding-top: 30px;
+}
+
+.heading {
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.pt30 {
+    padding-top: 30px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt60 {
+    margin-top: 60px;
+}
+
+.margin-bkg {
+    margin-top: 0px;
+}
+
+table {
+    background-color: white;
+}
+
+table.dataTable {
+    margin: 20px 0 10px;
+    width: 100% !important;
+}
+
+table.dataTable th {
+    text-align: left;
+}
+
+table.dataTable tbody tr.edit_product {
+    cursor: pointer;
+}
+
+.dataTables_info {
+    float: left;
+    padding: 10px;
+}
+
+.dataTables_paginate {
+    float: right;
+}
+
+.dataTables_paginate a {
+    display: block;
+    float: left;
+    margin-left: 4px;
+    padding: 6px;
+}
+
+.dataTables_paginate a.paginate_button_disabled {
+    opacity: 0.3
+}
+
+.dataTable tbody tr:last-of-type {
+    border-bottom: 0;
+}
+
+#table_appowners_filter input[type=search],
+.dataTables_filter input[type=search] {
+    border-style: none none solid;
+    border-style: none none solid;
+    border-width: medium medium 2px;
+    padding: 6px 12px;
+    border-color: #b2b1b1;
+    background-color: #f3f3f3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* datatables new css start*/
+.dataTables_wrapper .dataTables_filter {
+    float: left;
+    /* text-align: right; */
+    /*margin-bottom: 20px;*/
+}
+
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd {
+    background-color: #ffffff;
+}
+
+table.dataTable.display tbody tr.odd>.sorting_1,
+table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+    background-color: #ffffff;
+}
+
+table.dataTable.hover tbody tr:hover,
+table.dataTable.display tbody tr:hover {
+    background-color: #ffffff;
+}
+
+table.dataTable.display tbody tr:hover>.sorting_1,
+table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
+    background-color: #ffffff;
+}
+
+table.dataTable.display tbody tr.even>.sorting_1,
+table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+    background-color: #ffffff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #fff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #ffffff !important;
+    border: 1px solid #0099c7;
+    background-color: #0099c7;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0099c7), color-stop(100%, #0099c7));
+    background: -webkit-linear-gradient(top, #0099c7 0%, #0099c7 100%);
+    background: -moz-linear-gradient(top, #0099c7 0%, #0099c7 100%);
+    background: -ms-linear-gradient(top, #0099c7 0%, #0099c7 100%);
+    background: -o-linear-gradient(top, #0099c7 0%, #0099c7 100%);
+    background: linear-gradient(to bottom, #0099c7 0%, #0099c7 100%);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #fff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    background: inherit;
+    background-color: inherit;
+    border: 1px solid #008ab3;
+}
+
+
+
+/* datatables new css end*/
+.f-right {
+    float: right;
+}
+
+.w-20 {
+    width: 16%;
+}
+
+div#table_shareleads_wp {
+    overflow-x: scroll;
+}
+
+.cancel_kitchen_edit_form {
+    display: none;
+}
+
+.height-margin {
+    height: 35px;
+    margin-left: 10px;
+}
+
+button.swal2-confirm.btn.btn-success {
+    margin-left: 10px;
+}
+
+#new_admin_tags,
+#csv_file_tags {
+    display: none;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+input[type=radio]:checked:after {
+    background: #0075ff;
+}
+
+input[type=checkbox]:after {
+    color: #0075ff;
+}
+
+.custom_modal .bt_close_modal_icons {
+    border: none !important;
+    background: none !important;
+    font-size: 17px !important;
+    color: black !important;
+}
+
+@media screen and (min-width: 768px) {
+
+    select,
+    input,
+    label {
+        margin-bottom: 6px;
+    }
+}
+
+/* table.dataTable tbody td {
+    vertical-align: baseline;
+    padding: 0px 8px;
+} */
+.margin-top-15 {
+    margin-top: 15px;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+</script>
+<!-- cms script end -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+$('.ckedit').ckeditor(ckeditor_config.default);
+
+function toggleContainer(containerId) {
+    $('#' + containerId).toggle();
+}
+
+function deleteContract(id) {
+    console.log(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: "<?php echo p__("shareleads",'Are you sure?');?>",
+        text: "<?php echo p__("shareleads",'Do you want to delete?');?>",
+
+        showCancelButton: true,
+        cancelButtonText: "<?php echo p__("shareleads",'Discard');?>",
+        confirmButtonText: "<?php echo p__("shareleads",'Proceed');?>",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            url = '<?php echo $this->getUrl('shareleads/application/destory-contract'); ?>/id/' + id +
+                "/value_id/<?php echo $option->getId();?>";
+            reload(this, url, true, function(data) {
+                resetContractForm();
+                reloadContracts();
+                if (data.success == false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            Swal.fire({
+                icon: 'error',
+                title: "<?php echo p__("shareleads",'Your contract is safe :)');?>",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+}
+
+function deleteProduct(id) {
+    console.log(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: "<?php echo p__("shareleads",'Are you sure?');?>",
+        text: "<?php echo p__("shareleads",'Do you want to delete?');?>",
+
+        showCancelButton: true,
+        cancelButtonText: "<?php echo p__("shareleads",'Discard');?>",
+        confirmButtonText: "<?php echo p__("shareleads",'Proceed');?>",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            url = '<?php echo $this->getUrl('shareleads/product/delete-product'); ?>/id/' + id +
+                "/value_id/<?php echo $option->getId();?>";
+            reload(this, url, true, function(data) {
+
+                if (data.success) {
+                    reloadProducts();
+                    resetProduct();
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                }
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            Swal.fire({
+                icon: 'error',
+                title: "<?php echo p__("shareleads",'Your product is safe :)');?>",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+}
+
+function deleteAgent(id) {
+    console.log(id);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+        title: "<?php echo p__("shareleads",'Are you sure?');?>",
+        text: "<?php echo p__("shareleads",'Do you want to delete?');?>",
+
+        showCancelButton: true,
+        cancelButtonText: "<?php echo p__("shareleads",'Discard');?>",
+        confirmButtonText: "<?php echo p__("shareleads",'Proceed');?>",
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            url = '<?php echo $this->getUrl('shareleads/user/destory'); ?>/user_id/' + id +
+                "/value_id/<?php echo $option->getId();?>";
+            reload(this, url, true, function(data) {
+                $('#table_user').DataTable().ajax.reload();
+            });
+        } else if (
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            Swal.fire({
+                icon: 'error',
+                title: "<?php echo p__("shareleads",'Your agent is safe :)');?>",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    });
+}
+
+function resetContractForm() {
+    $('#contract_title').val('');
+    $('#contract_id').val('');
+    $('#contract_customer_id').val('');
+    $('#contract_pdf_url').val('');
+    $('#contract_description').val('');
+}
+$('#contractForm').submit(function(e) {
+    $("#mask").show();
+    e.preventDefault();
+
+    // Create a FormData object to store all form data
+    var fd = new FormData(this);
+
+    // Append the file input to FormData if it exists
+    var files = $('#contract_pdf_url')[0].files;
+    if (files.length > 0) {
+        fd.append('file', files[0]);
+    }
+
+    // Make the POST request
+    $.ajax({
+        url: this.action,
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+    }).done(function(response) {
+        var res = JSON.parse(response);
+        console.log(res);
+        if (res.message != '') {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: res.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+        resetContractForm();
+        reloadContracts();
+        // if (res.success == true && res.message == "") {
+        //     location.reload(); // Reload the page
+        // } else {
+        //     // Handle other cases if needed
+        // }
+    }).fail(function(response) {
+        console.log("Error Response");
+        var errorRes = JSON.parse(response.responseText); // Convert error responseText to object
+        console.log(errorRes);
+        if (errorRes.message != '') {
+            Swal.fire({
+                icon: "error",
+                title: "<?php echo p__("shareleads",'Error'); ?>",
+                html: errorRes.message,
+            });
+            // alert(errorRes.message); // Show message from error response
+        } else {
+            alert("Error"); // Default error message
+        }
+    }).always(function(response) {
+        $("#mask").hide();
+    });
+    return false;
+});
+
+function setContractForm(contract_id) {
+    resetContractForm();
+    url = '<?php echo $this->getUrl('shareleads/application/set-contract-form'); ?>/contract_id/' + contract_id +
+        "/value_id/<?php echo $option->getId();?>";
+    reload(this, url, true, function(response) {
+        console.log(response);
+        if (response.contract && Object.keys(response.contract).length > 0) {
+            $('#contract_title').val(response.contract.contract_title);
+            $('#contract_id').val(response.contract.contract_id);
+            $('#contract_customer_id').val(response.contract.customer_id);
+            $('#contract_pdf_url').val('');
+            $('#contract_description').val(response.contract.contract_description);
+        }
+    });
+}
+
+function uploadContract(contract_id = 0) {
+    $('#contractForm').slideDown();
+    if (contract_id != 0) {
+        setContractForm(contract_id);
+        $('#contract_id').val(contract_id);
+    } else {
+        $('#contract_id').val('');
+    }
+}
+
+function resetProduct() {
+    $('#product_id').val('');
+    $('#product_name').val('');
+    $('#product_points').val('');
+    $('#product_start_at').val('');
+    $('#product_expire_at').val('');
+    $('#product_status').val(0);
+    $('#product_img').val('');
+    $('#product_description').val('');
+    $('#show_product_img').hide().attr('src', '');
+    $('#product_img').val('');
+    // $('#remove_product_img').hide();
+}
+
+function editProduct(product_id = 0) {
+    $('#product_form').slideDown();
+    resetProduct();
+    $('#product_id').val(product_id);
+    $('#product_description').val('');
+    url = '<?php echo $this->getUrl('shareleads/product/get-product'); ?>/product_id/' + product_id +
+        "/value_id/<?php echo $option->getId();?>";
+    reload(this, url, true, function(response) {
+        console.log(response);
+        if (response.product && Object.keys(response.product).length > 0) {
+            $('#product_id').val(response.product.product_id);
+            $('#product_name').val(response.product.product_name);
+            $('#product_points').val(response.product.product_points);
+            $('#product_start_at').val(response.product.product_start_at);
+            $('#product_expire_at').val(response.product.product_expire_at);
+            $('#product_status').val(response.product.product_status);
+            $('#product_description').val(response.product.product_description);
+
+            if (response.product.product_img == null || response.product.product_img == "") {
+                $('#show_product_img').hide().attr('src', '');
+                $('#product_img').val('');
+                // $('#remove_product_img').hide();
+            } else {
+                image_url = '<?php echo $base_url;?>/images/application/' + '<?php echo $app_id;?>' +
+                    '/features/shareleads/' + response.product.product_img;
+                $('#show_product_img').hide().attr('src', image_url).slideDown();
+                $('#product_img').val(response.product.product_img);
+                // $('#remove_product_img').show();
+            }
+        }
+    });
+}
+
+function resetAgentForm() {
+    $('#agent_user_id').val('');
+    $('#agent_commission_points').val('');
+    $('#agent_invitation_code').val('');
+    $('#agent_type_id').val('');
+}
+
+function editAgent(agent_id = 0) {
+    $('#agent_form').slideDown();
+    resetAgentForm();
+    url = '<?php echo $this->getUrl('shareleads/user/get-agent'); ?>/agent_id/' + agent_id +
+        "/value_id/<?php echo $option->getId();?>";
+    reload(this, url, true, function(response) {
+        console.log(response);
+        if (response.agent && Object.keys(response.agent).length > 0) {
+            if (agent_id && response.agent.user_is_admin == '1') {
+                $('#agent_user_id').append($('<option>', {
+                    value: response.agent.user_id,
+                    text: response.agent.user_name + " " + response.agent.user_surname
+                }));
+            }
+            if (response.agent.field) {
+                $('#agent_invitation_code').prop('readonly', false);
+            } else {
+                $('#agent_invitation_code').prop('readonly', true);
+            }
+            $('#agent_user_id').val(response.agent.user_id);
+            $('#agent_commission_points').val(response.agent.agent_commission_points);
+            $('#agent_invitation_code').val(response.agent.agent_invitation_code);
+            $('#agent_type_id').val(response.agent.type_id);
+        }
+    });
+}
+
+
+$.datepicker.setDefaults($.datepicker.regional['<?php echo Core_Model_Language::getCurrentLanguage(); ?>']);
+$(".datepicker").datepicker({
+    changeMonth: true,
+    changeYear: true,
+    // format: 'd-m-yyyy'
+    dateFormat: 'dd/mm/yy'
+});
+var img_uploader = new Uploader();
+$('#tmp_product_img').fileupload({
+    dataType: 'json',
+    add: function(e, data) {
+        data.submit();
+        img_uploader.showProgressbar();
+    },
+    progressall: function(e, data) {
+        img_uploader.moveProgressbar(data);
+    },
+    done: function(e, data) {
+        if (data.result.error) {
+            img_uploader.showError(data.result.message);
+        }
+        if (data.result.success) {
+            img_uploader.hide();
+            var params = new Array();
+            params["url"] = '<?php echo $this->getUrl('template/crop/crop'); ?>';
+            params["file"] = data.result.files;
+            params["output_w"] = 530;
+            params["output_h"] = 272;
+            params["output_url"] =
+                '<?php echo str_replace('/', '$', $this->getUrl('shareleads/application/crop')) ?>';
+            params["uploader"] = 'img_uploader';
+            img_uploader.crop(params);
+            img_uploader.callback = function(file) {
+
+                var image = iframe.content.find(
+                    '#category_show_notification_picture_file_<?php echo $this->getOptionValue()->getId(); ?>'
+                );
+                $('#show_product_img').hide().attr('src',
+                        '<?php echo Core_Model_Directory::getTmpDirectory() ?>/' + file)
+                    .slideDown();
+                // $('#remove_product_img').show();
+                $('#product_img').val(file);
+            }
+        }
+    }
+});
+$('#upload_product_img_btn').click(function() {
+    $('#tmp_product_img').trigger('click');
+});
+// $('#remove_product_img').click(function() {
+//     if (confirm(
+//             "<?php //echo p__("shareleads","Are you sure you want to remove the picture?"); ?>")) {
+//         $('#show_product_img').hide().attr('src', '');
+//         $('#product_img').val('');
+//         $(this).hide();
+//     }
+//     return false;
+// });
+// ckeditor
+$('.ckedit').ckeditor(ckeditor_config.default);
+
+function reset_push_notification() {
+    $('#notification_admin_title').val('');
+    $('#notification_admin_text').val('');
+    $('#notification_agent_title').val('');
+    $('#notification_agent_text').val('');
+    $('#notification_client_title').val('');
+    $('#notification_client_text').val('');
+    $('#notification_status').val('0');
+    $('#notification_is_admin').prop('checked', false);
+    $('#notification_is_agent').prop('checked', false);
+    $('#notification_is_client').prop('checked', false);
+
+    $('#section_notification_is_admin').slideUp();
+    $('#section_notification_is_agent').slideUp();
+    $('#section_notification_is_client').slideUp();
+}
+
+function get_push_notification() {
+    reset_push_notification();
+    url =
+        "<?php echo $this->getUrl('shareleads/notification/getpushdata'); ?>/value_id/<?php echo $value_id;?>";
+    reload(this, url, true, function(data) {
+        if (data.success) {
+            console.log(data);
+            $('#notification_admin_title').val(data.data.notification_admin_title);
+            $('#notification_admin_text').val(data.data.notification_admin_text);
+            $('#notification_agent_title').val(data.data.notification_agent_title);
+            $('#notification_agent_text').val(data.data.notification_agent_text);
+            $('#notification_client_title').val(data.data.notification_client_title);
+            $('#notification_client_text').val(data.data.notification_client_text);
+            $('#notification_status').val(data.data.notification_status);
+            if (data.data.notification_is_admin == '1') {
+                $('#notification_is_admin').prop('checked', true);
+                $('#section_notification_is_admin').slideDown();
+            }
+            if (data.data.notification_is_agent == '1') {
+                $('#notification_is_agent').prop('checked', true);
+                $('#section_notification_is_agent').slideDown();
+            }
+            if (data.data.notification_is_client == '1') {
+                $('#notification_is_client').prop('checked', true);
+                $('#section_notification_is_client').slideDown();
+            }
+        }
+    });
+
+}
+get_push_notification();
+$('#email_type').on('change', function() {
+    if ($(this).val() != '') {
+        get_email_notification();
+    } else {
+        $('#email_text').val('');
+        $('#email_ccn').val('');
+        $('#email_object').val('');
+        $('#new_admin_tags').hide();
+        $('#csv_file_tags').hide();
+    }
+
+});
+
+function get_email_notification() {
+    $('#email_text').val('');
+    $('#email_ccn').val('');
+    $('#email_object').val('');
+
+    email_type = $('#email_type').val();
+    if (email_type == 'new_admin') {
+        $('#new_admin_tags').show();
+    } else {
+        $('#new_admin_tags').hide();
+    }
+    if (email_type == 'csv_file') {
+        $('#csv_file_tags').show();
+    } else {
+        $('#csv_file_tags').hide();
+    }
+    url =
+        '<?php echo $this->getUrl('shareleads/email/getemaildata'); ?>/value_id/<?php echo $value_id;?>/email_type/' +
+        email_type;
+    reload(this, url, true, function(data) {
+        if (data.success) {
+            $('#email_text').val(data.data.email_text);
+            $('#email_object').val(data.data.email_object);
+            $('#email_ccn').val(data.data.email_ccn);
+
+        } else {
+            $('#email_text').val(data.default_admin_template.text);
+            $('#email_ccn').val('');
+            $('#email_object').val(data.default_admin_template.subject);
+        }
+    });
+
+}
+var dt_object = {
+
+    responsive: true,
+    language: {
+        "decimal": "",
+        "emptyTable": "<?php echo p__("shareleads","No data available in table") ?>",
+        "info": "<?php echo p__("shareleads","Showing _START_ to _END_ of _TOTAL_ entries") ?>",
+        "infoEmpty": "<?php echo p__("shareleads","Showing 0 to 0 of 0 entries") ?>",
+        "infoFiltered": "<?php echo p__("shareleads","(filtered from _MAX_ total entries)") ?>",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "<?php echo p__("shareleads","Show _MENU_ entries") ?>",
+        "loadingRecords": "<?php echo p__("shareleads","Loading...") ?>",
+        "processing": "<?php echo p__("shareleads","Processing...") ?>",
+        "search": "<?php echo p__("shareleads","Search:") ?>",
+        "zeroRecords": "<?php echo p__("shareleads","No matching records found") ?>",
+        "paginate": {
+            "first": "<?php echo p__("shareleads","First") ?>",
+            "last": "<?php echo p__("shareleads","Last") ?>",
+            "next": "<?php echo p__("shareleads","Next") ?>",
+            "previous": "<?php echo p__("shareleads","Previous") ?>"
+        },
+        "aria": {
+            "sortAscending": "<?php echo p__("shareleads",": activate to sort column ascending") ?>",
+            "sortDescending": "<?php echo p__("shareleads",": activate to sort column descending") ?>"
+        },
+    },
+    bLengthChange: false,
+    bFilter: true,
+    sPaginationType: "full_numbers",
+    fnDrawCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        $.each(nRow.aoData, function(i, el) {
+            var tr = $(el.nTr);
+            tr.unbind('click');
+        }.bind(this));
+        $('.paginate_button').addClass('btn color-blue');
+        $('span a.paginate_button').addClass('btn btn-grey');
+    },
+    "order": [
+        [0, "desc"]
+    ],
+};
+
+
+function reset_form_user() {
+    $('#user_filter_start_date').val("");
+    $('#user_filter_end_date').val("");
+    document.querySelectorAll(".form_user_assign_training_table").value = "";
+    $('.form_user_assign_training_table').val("");
+    $("#form_user_id").val("");
+    $('#assign_user_name').html("");
+    $('#form_user').hide();
+    $('#grid_user_filter_start_date').val('');
+    $('#grid_user_filter_end_date').val('');
+    ajax_url =
+        '<?php echo $this->getUrl('shareleads/user/get-users?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+    table_user.ajax.url(ajax_url).load();
+    table_user.search('').
+    columns().search('').visible(true, true).order('asc').
+    page.len(10).
+    state.clear().
+    draw();
+}
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    $($.fn.dataTable.tables(true)).css('width', '100%');
+    $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+});
+// table_user
+var table_user = $('#table_user').DataTable(dt_object);
+ajax_url =
+    '<?php echo $this->getUrl('shareleads/user/get-users?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+table_user.ajax.url(ajax_url).load();
+table_user.search('').
+columns().search('').visible(true, true).order('asc').
+page.len(10).
+state.clear().
+draw();
+// table_clients
+var table_clients = $('#table_clients').DataTable(dt_object);
+ajax_url =
+    '<?php echo $this->getUrl('shareleads/user/get-clients?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+table_clients.ajax.url(ajax_url).load();
+table_clients.search('').
+columns().search('').visible(true, true).order('asc').
+page.len(10).
+state.clear().
+draw();
+// table_logs
+var table_logs = $('#table_logs').DataTable(dt_object);
+ajax_url =
+    '<?php echo $this->getUrl('shareleads/user/get-logs?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+table_logs.ajax.url(ajax_url).load();
+table_logs.search('').
+columns().search('').visible(true, true).order('asc').
+page.len(10).
+state.clear().
+draw();
+// table_contracts
+var table_contracts = $('#table_contracts').DataTable(dt_object);
+ajax_url =
+    '<?php echo $this->getUrl('shareleads/application/get-contracts?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+table_contracts.ajax.url(ajax_url).load();
+table_contracts.search('').
+columns().search('').visible(true, true).order('asc').
+page.len(10).
+state.clear().
+draw();
+
+function reloadContracts() {
+    $("#table_contracts").DataTable().destroy();
+    dt_object.ajax =
+        '<?php echo $this->getUrl('shareleads/application/get-contracts?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+    table_contracts = $('#table_contracts').DataTable(dt_object);
+}
+// table_product
+var table_product = $('#table_product').DataTable(dt_object);
+ajax_url =
+    '<?php echo $this->getUrl('shareleads/product/find-all-products?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+table_product.ajax.url(ajax_url).load();
+table_product.search('').
+columns().search('').visible(true, true).order('asc').
+page.len(10).
+state.clear().
+draw();
+
+function reloadProducts() {
+    $("#table_product").DataTable().destroy();
+    dt_object.ajax =
+        '<?php echo $this->getUrl('shareleads/product/find-all-products?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+    table_product = $('#table_product').DataTable(dt_object);
+}
+
+function userFilter() {
+    $('#mask').show();
+    ajax_url =
+        '<?php echo $this->getUrl('shareleads/user/get-users?app_id='.$app_id.'&value_id='.$option->getId()); ?>';
+    is_admin = $('#admins_fitler').val();
+
+    ajax_url = ajax_url + '&is_admin=' +
+        is_admin;
+    table_user.ajax.url(ajax_url).load(function() {
+        $('#mask').hide();
+    });
+}
+
+function adminFilter(filter, e) {
+    if ($(e).val() == '1') {
+        $(e).val(0);
+        $(e).addClass("btn-danger").removeClass("color-blue");
+    } else {
+        $(e).val(1);
+        $(e).addClass("color-blue").removeClass("btn-danger");
+    }
+    // $(".admin-filter").addClass("btn-danger").removeClass("btn-info");
+    table_user.search('').
+    columns().search('').visible(true, true).order('asc').
+    page.len(10).
+    state.clear().
+    draw();
+    userFilter();
+
+}
+
+function toggleStatus(customer_id, e) {
+    console.log(customer_id, e);
+    if (confirm(
+            "<?php echo p__("shareleads", 'Do you wish to alter the user status?'); ?>"
+        )) {
+        url =
+            "<?php echo $this->getUrl('shareleads/user/toggle-status'); ?>/value_id/<?php echo $value_id;?>/customer_id/" +
+            customer_id;
+        reload(this, url, true, function(data) {
+            if (data.success) {
+                if (data.is_admin == 1) {
+                    $(e).addClass("fa-user").removeClass("fa-user-o");
+                } else {
+                    $(e).addClass("fa-user-o").removeClass("fa-user");
+                }
+
+            }
+        });
+    }
+
+}
+
+function openLedger(agent_id) {
+    leder_table.open(agent_id);
+}
+let leder_table = {
+    tolerance: 180,
+    mask: null,
+    processEvents: function() {
+        $('#btn_leder_table_manager').unbind('click');
+        $('#btn_leder_table_manager').click(function() {
+            leder_table.open();
+        });
+
+        $('.close_modal_leder_table_manager').unbind('click');
+        $('.close_modal_leder_table_manager').click(function() {
+            leder_table.close(true);
+        });
+    },
+    open: function(agent_id) {
+        // alert(id);
+        var ref = this;
+        $('#mask').show();
+        $.ajax({
+                url: '<?php echo $this->getUrl('shareleads/application/get-leders'); ?>',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    app_id: <?php echo $app_id; ?>,
+                    value_id: <?php echo $value_id; ?>,
+                    agent_id: agent_id,
+                }
+            })
+            .done(function(data) {
+                $('#mask').hide("fast", function() {
+                    $(document).keyup(function(e) {
+                        if (e.which == 27) leder_table.close(true);
+                    });
+
+                    $(window).unbind('resize');
+                    $(window).resize(ref.resize.bind(ref));
+
+                    ref.resize();
+
+                    $('#leder-table-data').html(data);
+
+                    $('#leder_table_manager').fadeIn();
+                });
+            })
+            .fail(function(data) {
+                $('#mask').hide();
+            })
+            .always(function() {
+                $('#mask').hide();
+            });
+        /* $(document).keyup(function (e) {
+        	if (e.which == 27) leder_table.close(true);
+        });
+
+        $(window).unbind('resize');
+        $(window).resize(this.resize.bind(this));
+
+        this.resize();
+
+        $('#leder_table_manager').fadeIn(); */
+
+    },
+    close: function(animated) {
+        if (animated) {
+            $('#leder_table_manager').fadeOut(300, function() {});
+        } else {
+            $('#leder_table_manager').hide();
+        }
+        $(document).unbind('keyup');
+    },
+    resize: function(all) {
+        let selector = ".leder_table_details";
+        if (!all) {
+            selector += ":visible";
+        }
+        $('#leder_table').css('height', $(window).outerHeight() - 75);
+        $('#leder_table_manager').find(selector).css('height', $(window).outerHeight() - this
+            .tolerance);
+    }
+};
+leder_table.processEvents();
+
+
+let client_table = {
+    tolerance: 180,
+    mask: null,
+    processEvents: function() {
+        $('#btn_client_table_manager').unbind('click');
+        $('#btn_client_table_manager').click(function() {
+            client_table.open();
+        });
+
+        $('.close_modal_client_table_manager').unbind('click');
+        $('.close_modal_client_table_manager').click(function() {
+            client_table.close(true);
+        });
+    },
+    open: function(agent_id) {
+        // alert(id);
+        var ref = this;
+        $('#mask').show();
+        $.ajax({
+                url: '<?php echo $this->getUrl('shareleads/application/get-clients'); ?>',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    app_id: <?php echo $app_id; ?>,
+                    value_id: <?php echo $value_id; ?>,
+                    agent_id: agent_id,
+                }
+            })
+            .done(function(data) {
+                $('#mask').hide("fast", function() {
+                    $(document).keyup(function(e) {
+                        if (e.which == 27) client_table.close(true);
+                    });
+
+                    $(window).unbind('resize');
+                    $(window).resize(ref.resize.bind(ref));
+
+                    ref.resize();
+
+                    $('#client-table-data').html(data);
+
+                    $('#client_table_manager').fadeIn();
+                });
+            })
+            .fail(function(data) {
+                $('#mask').hide();
+            })
+            .always(function() {
+                $('#mask').hide();
+            });
+        /* $(document).keyup(function (e) {
+        	if (e.which == 27) client_table.close(true);
+        });
+
+        $(window).unbind('resize');
+        $(window).resize(this.resize.bind(this));
+
+        this.resize();
+
+        $('#client_table_manager').fadeIn(); */
+
+    },
+    close: function(animated) {
+        if (animated) {
+            $('#client_table_manager').fadeOut(300, function() {});
+        } else {
+            $('#client_table_manager').hide();
+        }
+        $(document).unbind('keyup');
+    },
+    resize: function(all) {
+        let selector = ".client_table_details";
+        if (!all) {
+            selector += ":visible";
+        }
+        $('#client_table').css('height', $(window).outerHeight() - 75);
+        $('#client_table_manager').find(selector).css('height', $(window).outerHeight() - this
+            .tolerance);
+    }
+};
+client_table.processEvents();
+
+function openClient(agent_id) {
+    client_table.open(agent_id);
+}
+$('#show_all_agents_btn').on('click', function() {
+    resetAgentForm();
+    $('#agent_form').slideUp();
+});
+$('#show_all_products_btn').on('click', function() {
+    $('#product_form').slideUp();
+});
+$('#show_all_contracts_btn').on('click', function() {
+    $('#contractForm').slideUp();
+    resetContractForm();
+});
+
+// submition forms
+page.setCallback('didappear', function() {
+
+    $('#product_form').submit(function() {
+        reload(this, this.action, true, function(data) {
+            reloadProducts();
+            resetProduct();
+            $('#product_form').slideUp();
+        });
+        return false;
+    });
+    $('#form_user').submit(function() {
+        reload(this, this.action, true, function(data) {
+            reset_form_user();
+        });
+        return false;
+    });
+    $('#agent_form').submit(function() {
+        reload(this, this.action, true, function(data) {
+            page.reload();
+        });
+        return false;
+    });
+    $('#notification_setting_form')
+        .submit(function() {
+            reload(this, this.action, true, function(data) {});
+            return false;
+        });
+    $('#email_setting_form')
+        .submit(function() {
+            reload(this, this.action, true, function(data) {
+                // page.reload();
+            });
+            return false;
+        });
+    $('#sharing_form')
+        .submit(function() {
+            reload(this, this.action, true, function(data) {
+                // page.reload();
+            });
+            return false;
+        });
+});
+page.setCallback('willdisappear', function() {
+
+    $('#product_form').unbind('submit');
+    $('#agent_form').unbind('agent_form');
+    $('#form_user').unbind('submit');
+    $('#contractForm').unbind('submit');
+    $('#email_setting_form').unbind('submit');
+    $('#sharing_form').unbind('submit');
+    $('#notification_setting_form').unbind('submit');
+});
+//Background
+bindForms('#tab_background');
+$('#tab_background button#toggle_design').remove();
+$('#tab_background #change_background_image').show();
+</script>
+
+<!-- files tab -->
+<!-- folder_users -->
+
+
+<script>
+$($.fn.dataTable.tables(true)).css('width', '100%');
+$($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+</script>

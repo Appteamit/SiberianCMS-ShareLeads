@@ -1,0 +1,57 @@
+<?php 
+	$transactions = $this->getTransactions();
+	$agent = $this->getAgent();
+	$balance = $this->getBalance();
+    $app_id = $this->getAppId();
+    $value_id = $this->getValueId();
+    // dd($agent);
+?>
+<h3 class="title-editor border-blue no-border-radius text-center">
+    <?php echo $agent['user_name'].' '. $agent['user_surname']; ?>
+</h3>
+<div class="container-fluid content-feature" style="padding-top: 20px;" id="">
+    <h3 style="text-align: center;margin: 0px;"><?php echo p__("shareleads", 'Available Balance'); ?>
+        <?php echo $balance['balance_points']; ?></h3>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="width: 10%;"><?php echo p__("shareleads", '#UID'); ?></th>
+            <th style="width: 50%;"><?php echo p__("shareleads", 'Contract / Product'); ?></th>
+            <th style="width: 20%;"><?php echo p__("shareleads", 'Points'); ?></th>
+            <th style="width: 20%;"><?php echo p__("shareleads", 'DateTime'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($transactions as $transaction): ?>
+        <tr>
+            <td>
+                <?php echo $transaction['transaction_id']; ?>
+            </td>
+            <td>
+                <?php echo $transaction['title']; ?>
+            </td>
+            <td>
+                <?php echo ($transaction['transaction_type'] == 'DEBIT')?'-':'+'; ?><?php echo $transaction['points']; ?>
+            </td>
+            <td>
+                <?php echo $transaction['created_at']; ?>
+            </td>
+        </tr>
+        <?php endforeach;?>
+        <?php if(empty($transactions)): ?>
+        <tr class="error">
+            <td colspan="4">
+                <?php echo p__("shareleads", 'No data found'); ?>
+            </td>
+        </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+<style>
+.leder_table_details {
+    height: 100%;
+    overflow: overlay;
+    width: 100%;
+}
+</style>

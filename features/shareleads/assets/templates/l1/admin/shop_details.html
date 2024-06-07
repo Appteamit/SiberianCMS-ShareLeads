@@ -1,0 +1,48 @@
+<ion-view class="shareleads-shop_details l1" sb-page-background cache-view="false">
+    <ion-nav-title class="title title-center">
+        {{ ::shareleads.page_title | translate:"shareleads" }}
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!-- Right button content goes here -->
+        <!-- <button type="button" class="button button-icon icon ion-person-add" ng-click="navigateTo('shareleads-invitation')">
+        </button> -->
+    </ion-nav-buttons>
+    <ion-content class="shareleads">
+        <!-- <ion-refresher ng-show="is_logged_in" pulling-text="{{ ::'Pull to refresh...' | translate:'shareleads' }}" on-refresh="loadContent(true)"></ion-refresher> -->
+
+        <div class="card" ng-show="!is_logged_in">
+            <div class="item item-text-wrap padding-0">
+                <p class="text-center font-weight-bold">{{ ::"You must be logged in to use this feature." | translate:"shareleads" }}</p>
+                <div class="button-bar bar-stable m-top-10">
+                    <a class="button" ng-click="loginModalMP();">{{ ::"Click here to login" | translate:"shareleads" }}</a>
+                </div>
+            </div>
+        </div>
+		
+		  
+        <div class="list card">
+            <div class="item item-image">
+                <img ng-src="{{product.product_img}}">
+            </div>
+            <h2>{{product.product_name}}</h2>
+
+            <button class="button button-block button-positive button-positive-custom" ng-click="buyNow(product.product_id)" >{{ ::"Redeem" | translate:"shareleads" }} {{product.product_points}}</button>
+            <!-- <button class="button button-block button-positive button-positive-custom" ng-if="product.redeem==1">{{ ::"Redeemed" | translate:"shareleads" }} {{product.product_points}}</button> -->
+            <p ng-bind-html="trustedHTML(product.product_description)"></p>
+
+        </div>
+
+        
+        
+
+
+		<div style="margin-bottom: 30px;"></div>
+    </ion-content>
+	<style>
+		.item-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px; /* Adjust the max-height as needed */
+        }
+	</style>
+</ion-view>

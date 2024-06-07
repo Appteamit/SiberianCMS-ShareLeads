@@ -1,0 +1,1006 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-07T11:00:10+02:00\n"
+"PO-Revision-Date: 2022-02-07T11:00:10+02:00\n"
+"Language: \n"
+
+
+# GMT 1714549410.1001
+msgctxt "shareleads"
+msgid "Shareleads"
+msgstr "Shareleads"
+
+# GMT 1714549410.1001
+msgctxt "shareleads"
+msgid "shareleads"
+msgstr "shareleads"
+
+# GMT 1714549410.1002
+#, mobile
+msgctxt "shareleads"
+msgid "Shareleads"
+msgstr "Shareleads"
+
+# GMT 1714549410.1002
+#, mobile
+msgctxt "shareleads"
+msgid "shareleads"
+msgstr "shareleads"
+
+# GMT 1714549410.1005
+msgctxt "shareleads"
+msgid "An error occurred during process. Please try again later."
+msgstr "An error occurred during process. Please try again later."
+
+# GMT 1714549410.1006
+msgctxt "shareleads"
+msgid "An error occurred while saving. Please try again later."
+msgstr "An error occurred while saving. Please try again later."
+
+# GMT 1714549410.1007
+msgctxt "shareleads"
+msgid "An error occurred while saving. Please try again later."
+msgstr "An error occurred while saving. Please try again later."
+
+# GMT 1714549410.1008
+msgctxt "shareleads"
+msgid "Info successfully saved."
+msgstr "Info successfully saved."
+
+# GMT 1714549410.1009
+msgctxt "shareleads"
+msgid "Settings successfully saved."
+msgstr "Settings successfully saved."
+
+# GMT 1714549410.1019
+msgctxt "shareleads"
+msgid "You are using your custom help URL."
+msgstr "You are using your custom help URL."
+
+# GMT 1714549410.1020
+msgctxt "shareleads"
+msgid "You are using default help URL (shareleads)."
+msgstr "You are using default help URL (shareleads)."
+
+# GMT 1714549410.1021
+msgctxt "shareleads"
+msgid "Help URL cannot be empty."
+msgstr "Help URL cannot be empty."
+
+# GMT 1714549410.1022
+msgctxt "shareleads"
+msgid "Help URL is not valid."
+msgstr "Help URL is not valid."
+
+# GMT 1714549410.1023
+msgctxt "shareleads"
+msgid "Help URL updated successfully."
+msgstr "Help URL updated successfully."
+
+# GMT 1714549410.1024
+msgctxt "shareleads"
+msgid "Your Module License Key"
+msgstr "Your Module License Key"
+
+# GMT 1714549410.1025
+msgctxt "shareleads"
+msgid "Your Module Help URL"
+msgstr "Your Module Help URL"
+
+# GMT 1714549410.1026
+msgctxt "shareleads"
+msgid "License"
+msgstr "License"
+
+# GMT 1714549410.1027
+msgctxt "shareleads"
+msgid "Module"
+msgstr "Module"
+
+# GMT 1714549410.1028
+msgctxt "shareleads"
+msgid "Base url mismatch."
+msgstr "Base url mismatch."
+
+# GMT 1714549410.1029
+msgctxt "shareleads"
+msgid "App id mismatch."
+msgstr "App id mismatch."
+
+# GMT 1714549410.1030
+msgctxt "shareleads"
+msgid "License information is invalid."
+msgstr "License information is invalid."
+
+# GMT 1714549410.1032
+msgctxt "shareleads"
+msgid "App Licenses"
+msgstr "App Licenses"
+
+# GMT 1714549410.1033
+msgctxt "shareleads"
+msgid "Expired"
+msgstr "Expired"
+
+# GMT 1714549410.1034
+msgctxt "shareleads"
+msgid "Active"
+msgstr "Active"
+
+# GMT 1714549410.1035
+msgctxt "shareleads"
+msgid "App Id"
+msgstr "App Id"
+
+# GMT 1714549410.1036
+msgctxt "shareleads"
+msgid "App Name"
+msgstr "App Name"
+
+# GMT 1714549410.1037
+msgctxt "shareleads"
+msgid "Activated"
+msgstr "Activated"
+
+# GMT 1714549410.1039
+msgctxt "shareleads"
+msgid "Status"
+msgstr "Status"
+
+# GMT 1714549410.1045
+msgctxt "shareleads"
+msgid "Save"
+msgstr "Save"
+
+# GMT 1714549410.1045
+msgctxt "shareleads"
+msgid "Agent Ledger"
+msgstr "Agent Ledger"
+
+# GMT 1714549410.1045
+msgctxt "shareleads"
+msgid "Agent Subscribers"
+msgstr "Agent Subscribers"
+
+# GMT 1714549410.1046
+msgctxt "shareleads"
+msgid "Success."
+msgstr "Success."
+
+# GMT 1714549410.1049
+msgctxt "shareleads"
+msgid "Id"
+msgstr "Id"
+
+# GMT 1714549410.1050
+msgctxt "shareleads"
+msgid "Name"
+msgstr "Name"
+
+# GMT 1714549410.1051
+msgctxt "shareleads"
+msgid "Email"
+msgstr "Email"
+
+# GMT 1714549410.1052
+msgctxt "shareleads"
+msgid "Surname"
+msgstr "Surname"
+
+# GMT 1714549410.1053
+msgctxt "shareleads"
+msgid "No data available in table"
+msgstr "No data available in table"
+
+# GMT 1714549410.1054
+msgctxt "shareleads"
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Showing _START_ to _END_ of _TOTAL_ entries"
+
+# GMT 1714549410.1055
+msgctxt "shareleads"
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Showing 0 to 0 of 0 entries"
+
+# GMT 1714549410.1056
+msgctxt "shareleads"
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(filtered from _MAX_ total entries)"
+
+# GMT 1714549410.1057
+msgctxt "shareleads"
+msgid "Show _MENU_ entries"
+msgstr "Show _MENU_ entries"
+
+# GMT 1714549410.1058
+msgctxt "shareleads"
+msgid "Loading..."
+msgstr "Loading..."
+
+# GMT 1714549410.1059
+msgctxt "shareleads"
+msgid "Processing..."
+msgstr "Processing..."
+
+# GMT 1714549410.1060
+msgctxt "shareleads"
+msgid "Search:"
+msgstr "Search:"
+
+# GMT 1714549410.1061
+msgctxt "shareleads"
+msgid "No matching records found"
+msgstr "No matching records found"
+
+# GMT 1714549410.1062
+msgctxt "shareleads"
+msgid "First"
+msgstr "First"
+
+# GMT 1714549410.1063
+msgctxt "shareleads"
+msgid "Last"
+msgstr "Last"
+
+# GMT 1714549410.1064
+msgctxt "shareleads"
+msgid "Next"
+msgstr "Next"
+
+# GMT 1714549410.1065
+msgctxt "shareleads"
+msgid "Previous"
+msgstr "Previous"
+
+# GMT 1714549410.1066
+msgctxt "shareleads"
+msgid ": activate to sort column ascending"
+msgstr ": activate to sort column ascending"
+
+# GMT 1714549410.1067
+msgctxt "shareleads"
+msgid ": activate to sort column descending"
+msgstr ": activate to sort column descending"
+
+# GMT 1714549410.1068
+msgctxt "shareleads"
+msgid "Action"
+msgstr "Action"
+
+# GMT 1714549410.1069
+msgctxt "shareleads"
+msgid "Delete"
+msgstr "Delete"
+
+# GMT 1714549410.1074
+#, mobile
+msgctxt "shareleads"
+msgid "Click here to login"
+msgstr "Click here to login"
+
+# GMT 1714549410.1075
+#, mobile
+msgctxt "shareleads"
+msgid "You must be logged in to use this feature."
+msgstr "You must be logged in to use this feature."
+
+# GMT 1714549410.1097
+msgctxt "shareleads"
+msgid "Created At"
+msgstr "Created At"
+
+# GMT 1714549410.1098
+msgctxt "shareleads"
+msgid "Updated At"
+msgstr "Updated At"
+
+# GMT 1714549410.1101
+msgctxt "shareleads"
+msgid "User"
+msgstr "User"
+
+
+# GMT 1714549410.1242
+#, mobile
+msgctxt "shareleads"
+msgid "Admin"
+msgstr "Admin"
+
+# GMT 1714549410.1242
+#, mobile
+msgctxt "shareleads"
+msgid "Agent"
+msgstr "Agent"
+
+# GMT 1714549410.1242
+#, mobile
+msgctxt "shareleads"
+msgid "Client"
+msgstr "Client"
+
+# GMT 1714549410.1243
+#, mobile
+msgctxt "shareleads"
+msgid "New Signup push notifications?"
+msgstr "New Signup push notifications?"
+
+# GMT 1714549410.1244
+#, mobile
+msgctxt "shareleads"
+msgid "New Signup push notifications"
+msgstr "New Signup push notifications"
+
+# GMT 1714549410.1245
+#, mobile
+msgctxt "shareleads"
+msgid "Enable Receiver"
+msgstr "Enable Receiver"
+
+# GMT 1714549410.1246
+#, mobile
+msgctxt "shareleads"
+msgid "Disabled"
+msgstr "Disabled"
+
+# GMT 1714549410.1247
+#, mobile
+msgctxt "shareleads"
+msgid "Enabled"
+msgstr "Enabled"
+
+# GMT 1714549410.1248
+#, mobile
+msgctxt "shareleads"
+msgid "Email Notification Title:"
+msgstr "Email Notification Title:"
+
+# GMT 1714549410.1249
+#, mobile
+msgctxt "shareleads"
+msgid "Email Notification Description:"
+msgstr "Email Notification Description:"
+
+# GMT 1714549410.1250
+#, mobile
+msgctxt "shareleads"
+msgid "Notification"
+msgstr "Notification"
+
+# GMT 1714549410.1251
+#, mobile
+msgctxt "shareleads"
+msgid "Add Product"
+msgstr "Add Product"
+
+# GMT 1714549410.1252
+#, mobile
+msgctxt "shareleads"
+msgid "Add A Product"
+msgstr "Add A ProductAdd A Product"
+
+# GMT 1714549410.1253
+#, mobile
+msgctxt "shareleads"
+msgid "Back"
+msgstr "Back"
+
+# GMT 1714549410.1253
+#, mobile
+msgctxt "shareleads"
+msgid "Cover Image"
+msgstr "Cover Image"
+
+# GMT 1714549410.1254
+#, mobile
+msgctxt "shareleads"
+msgid "Picture"
+msgstr "Picture"
+
+# GMT 1714549410.1255
+#, mobile
+msgctxt "shareleads"
+msgid "Description"
+msgstr "Description"
+
+# GMT 1714549410.1256
+#, mobile
+msgctxt "shareleads"
+msgid "Points"
+msgstr "Points"
+
+# GMT 1714549410.1257
+#, mobile
+msgctxt "shareleads"
+msgid "Start At"
+msgstr "Start At"
+
+# GMT 1714549410.1258
+#, mobile
+msgctxt "shareleads"
+msgid "Expire At"
+msgstr "Expire At"
+
+# GMT 1714549410.1259
+#, mobile
+msgctxt "shareleads"
+msgid "Can Use X Times"
+msgstr "Can Use X Times"
+
+# GMT 1714549410.1260
+#, mobile
+msgctxt "shareleads"
+msgid "UID"
+msgstr "UID"
+
+# GMT 1714549410.1261
+#, mobile
+msgctxt "shareleads"
+msgid "Redeemed Count"
+msgstr "Redeemed Count"
+
+# GMT 1714549410.1262
+#, mobile
+msgctxt "shareleads"
+msgid "Start date is not smaller than expire date."
+msgstr "Start date is not smaller than expire date."
+
+# GMT 1714549410.1263
+#, mobile
+msgctxt "shareleads"
+msgid "product name cannot be empty."
+msgstr "product name cannot be empty."
+
+# GMT 1714549410.1264
+#, mobile
+msgctxt "shareleads"
+msgid "product points cannot be empty."
+msgstr "product points cannot be empty."
+
+# GMT 1714549410.1265
+#, mobile
+msgctxt "shareleads"
+msgid "Product has been successfully updated."
+msgstr "Product has been successfully updated."
+
+# GMT 1714549410.1266
+#, mobile
+msgctxt "shareleads"
+msgid "Product has been successfully saved."
+msgstr "Product has been successfully saved."
+
+# GMT 1714549410.1267
+#, mobile
+msgctxt "shareleads"
+msgid "Add Agent"
+msgstr "Add Agent"
+
+# GMT 1714549410.1268
+#, mobile
+msgctxt "shareleads"
+msgid "Upload Contracts"
+msgstr "Upload Contracts"
+
+# GMT 1714549410.1269
+#, mobile
+msgctxt "shareleads"
+msgid "Add Contract"
+msgstr "Add Contract"
+
+# GMT 1714549410.1270
+#, mobile
+msgctxt "shareleads"
+msgid "Contract Title"
+msgstr "Contract Title"
+
+# GMT 1714549410.1271
+#, mobile
+msgctxt "shareleads"
+msgid "Add A Contract"
+msgstr "Add A Contract"
+
+# GMT 1714549410.1272
+#, mobile
+msgctxt "shareleads"
+msgid "Select Client"
+msgstr "Select Client"
+
+# GMT 1714549410.1273
+#, mobile
+msgctxt "shareleads"
+msgid "Contract File"
+msgstr "Contract File"
+
+# GMT 1714549410.1274
+#, mobile
+msgctxt "shareleads"
+msgid "Contract saved successfully."
+msgstr "Contract saved successfully."
+
+# GMT 1714549410.1275
+#, mobile
+msgctxt "shareleads"
+msgid "contract title cannot be empty."
+msgstr "contract title cannot be empty."
+
+# GMT 1714549410.1276
+#, mobile
+msgctxt "shareleads"
+msgid "contract pdf cannot be empty."
+msgstr "contract pdf cannot be empty."
+
+# GMT 1714549410.1277
+#, mobile
+msgctxt "shareleads"
+msgid "Error"
+msgstr "Error"
+
+# GMT 1714549410.1278
+#, mobile
+msgctxt "shareleads"
+msgid "Client Name"
+msgstr "Client Name"
+
+# GMT 1714549410.1279
+#, mobile
+msgctxt "shareleads"
+msgid "Download Contract"
+msgstr "Download Contract"
+
+# GMT 1714549410.1280
+#, mobile
+msgctxt "shareleads"
+msgid "Download"
+msgstr "Download"
+
+# GMT 1714549410.1281
+#, mobile
+msgctxt "shareleads"
+msgid "Contract deleted successfully."
+msgstr "Contract deleted successfully."
+
+# GMT 1714549410.1282
+#, mobile
+msgctxt "shareleads"
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+# GMT 1714549410.1283
+#, mobile
+msgctxt "shareleads"
+msgid "Do you want to delete?"
+msgstr "Do you want to delete?"
+
+# GMT 1714549410.1284
+#, mobile
+msgctxt "shareleads"
+msgid "Discard"
+msgstr "Discard"
+
+# GMT 1714549410.1285
+#, mobile
+msgctxt "shareleads"
+msgid "Proceed"
+msgstr "Proceed"
+
+# GMT 1714549410.1286
+#, mobile
+msgctxt "shareleads"
+msgid "Your contract is safe :)"
+msgstr "Your contract is safe :)"
+
+# GMT 1714549410.1287
+#, mobile
+msgctxt "shareleads"
+msgid "Admin Template'"
+msgstr "Admin Template'"
+
+# GMT 1714549410.1288
+#, mobile
+msgctxt "shareleads"
+msgid "Agent Template"
+msgstr "Agent Template"
+
+# GMT 1714549410.1289
+#, mobile
+msgctxt "shareleads"
+msgid "Client Template"
+msgstr "Client Template"
+
+# GMT 1714549410.1290
+#, mobile
+msgctxt "shareleads"
+msgid "Agents"
+msgstr "Agents"
+
+# GMT 1714549410.1291
+#, mobile
+msgctxt "shareleads"
+msgid "Add Agent"
+msgstr "Add Agent"
+
+# GMT 1714549410.1292
+#, mobile
+msgctxt "shareleads"
+msgid "Add A Agent"
+msgstr "Add A Agent"
+
+# GMT 1714549410.1293
+#, mobile
+msgctxt "shareleads"
+msgid "Choose User to set as Agent"
+msgstr "Choose User to set as Agent"
+
+# GMT 1714549410.1294
+#, mobile
+msgctxt "shareleads"
+msgid "Agent Type"
+msgstr "Agent Type"
+
+# GMT 1714549410.1295
+#, mobile
+msgctxt "shareleads"
+msgid "Choose type"
+msgstr "Choose type"
+
+# GMT 1714549410.1296
+#, mobile
+msgctxt "shareleads"
+msgid "Commission Points"
+msgstr "Commission Points"
+
+# GMT 1714549410.1297
+#, mobile
+msgctxt "shareleads"
+msgid "Invitation Code (Unique)"
+msgstr "Invitation Code (Unique)"
+
+# GMT 1714549410.1298
+#, mobile
+msgctxt "shareleads"
+msgid "Agent has been successfully saved."
+msgstr "Agent has been successfully saved."
+
+# GMT 1714549410.1299
+#, mobile
+msgctxt "shareleads"
+msgid "agent commission points cannot be empty."
+msgstr "agent commission points cannot be empty."
+
+# GMT 1714549410.1300
+#, mobile
+msgctxt "shareleads"
+msgid "user cannot be empty."
+msgstr "user cannot be empty."
+
+# GMT 1714549410.1301
+#, mobile
+msgctxt "shareleads"
+msgid "Contract File (PDF)"
+msgstr "Contract File (PDF)"
+
+# GMT 1714549410.1302
+#, mobile
+msgctxt "shareleads"
+msgid "Enable/Disable"
+msgstr "Enable/Disable"
+
+# GMT 1714549410.1303
+#, mobile
+msgctxt "shareleads"
+msgid "Customize share text"
+msgstr "Customize share text"
+
+# GMT 1714549410.1304
+#, mobile
+msgctxt "shareleads"
+msgid "Settings"
+msgstr "Settings"
+
+# GMT 1714549410.1305
+#, mobile
+msgctxt "shareleads"
+msgid "setting save successfully."
+msgstr "setting save successfully."
+
+# GMT 1714549410.1306
+#, mobile
+msgctxt "shareleads"
+msgid "setting edit successfully."
+msgstr "setting edit successfully."
+
+# GMT 1714549410.1307
+#, mobile
+msgctxt "shareleads"
+msgid "Text"
+msgstr "Text"
+
+# GMT 1714549410.1308
+#, mobile
+msgctxt "shareleads"
+msgid "Download Contract"
+msgstr "Download Contract"
+
+# GMT 1714549410.1309
+#, mobile
+msgctxt "shareleads"
+msgid "Invitation Code"
+msgstr "Invitation Code"
+
+# GMT 1714549410.1310
+#, mobile
+msgctxt "shareleads"
+msgid "Submit"
+msgstr "Submit"
+
+# GMT 1714549410.1311
+#, mobile
+msgctxt "shareleads"
+msgid "Invalid Code"
+msgstr "Invalid Code"
+
+# GMT 1714549410.1312
+#, mobile
+msgctxt "shareleads"
+msgid "Done"
+msgstr "Done"
+
+# GMT 1714549410.1313
+#, mobile
+msgctxt "shareleads"
+msgid "Info"
+msgstr "Info"
+
+# GMT 1714549410.1314
+#, mobile
+msgctxt "shareleads"
+msgid "Ok"
+msgstr "Ok"
+
+# GMT 1714549410.1315
+#, mobile
+msgctxt "shareleads"
+msgid "Please enter a unique code."
+msgstr "Please enter a unique code."
+
+# GMT 1714549410.1316
+#, mobile
+msgctxt "shareleads"
+msgid "Subscribers"
+msgstr "Subscribers"
+
+# GMT 1714549410.1317
+#, mobile
+msgctxt "shareleads"
+msgid "Invitations"
+msgstr "Invitations"
+
+# GMT 1714549410.1318
+#, mobile
+msgctxt "shareleads"
+msgid "Shop"
+msgstr "Shop"
+
+# GMT 1714549410.1318
+#, mobile
+msgctxt "shareleads"
+msgid "Transactions"
+msgstr "Transactions"
+
+# GMT 1714549410.1319
+#, mobile
+msgctxt "shareleads"
+msgid "My Products"
+msgstr "My Products"
+
+# GMT 1714549410.1320
+#, mobile
+msgctxt "shareleads"
+msgid "Data not found"
+msgstr "Data not found"
+
+# GMT 1714549410.1321
+#, mobile
+msgctxt "shareleads"
+msgid "Share"
+msgstr "Share"
+
+# GMT 1714549410.1322
+#, mobile
+msgctxt "shareleads"
+msgid "Redeem"
+msgstr "Redeem"
+
+# GMT 1714549410.1323
+#, mobile
+msgctxt "shareleads"
+msgid "Already bought"
+msgstr "Already bought"
+
+# GMT 1714549410.1324
+#, mobile
+msgctxt "shareleads"
+msgid "Insufficient Points"
+msgstr "Insufficient Points"
+
+# GMT 1714549410.1325
+#, mobile
+msgctxt "shareleads"
+msgid "Success"
+msgstr "Success"
+
+# GMT 1714549410.1326
+#, mobile
+msgctxt "shareleads"
+msgid "Error"
+msgstr "Error"
+
+# GMT 1714549410.1327
+#, mobile
+msgctxt "shareleads"
+msgid "Available Points:"
+msgstr "Available Points:"
+
+# GMT 1714549410.1328
+#, mobile
+msgctxt "shareleads"
+msgid "Redeemed"
+msgstr "Redeemed"
+
+# GMT 1714549410.1329
+#, mobile
+msgctxt "shareleads"
+msgid "#UID"
+msgstr "#UID"
+msgstr "Redeemed"
+
+# GMT 1714549410.1330
+#, mobile
+msgctxt "shareleads"
+msgid "Contract / Product"
+msgstr "Contract / Product"
+
+# GMT 1714549410.1331
+#, mobile
+msgctxt "shareleads"
+msgid "DateTime"
+msgstr "DateTime"
+
+# GMT 1714549410.1332
+#, mobile
+msgctxt "shareleads"
+msgid "Ledger Report"
+msgstr "Ledger Report"
+
+# GMT 1714549410.1333
+#, mobile
+msgctxt "shareleads"
+msgid "Client List"
+msgstr "Client List"
+
+# GMT 1714549410.1334
+#, mobile
+msgctxt "shareleads"
+msgid "No data found"
+msgstr "No data foundNo data found"
+
+# GMT 1714549410.1335
+#, mobile
+msgctxt "shareleads"
+msgid "Available Balance"
+msgstr "Available Balance"
+
+# GMT 1714549410.1336
+#, mobile
+msgctxt "shareleads"
+msgid "Your agent is safe :)"
+msgstr "Your agent is safe :)"
+
+# GMT 1714549410.1337
+#, mobile
+msgctxt "shareleads"
+msgid "The agent has been successfully removed."
+msgstr "The agent has been successfully removed."
+
+# GMT 1714549410.1338
+#, mobile
+msgctxt "shareleads"
+msgid "This contract can not be deleted. The agent has used up his balance."
+msgstr "This contract can not be deleted. The agent has used up his balance."
+
+# GMT 1714549410.1339
+#, mobile
+msgctxt "shareleads"
+msgid "agent intvitation code cannot be empty."
+msgstr "agent intvitation code cannot be empty."
+
+# GMT 1714549410.1340
+#, mobile
+msgctxt "shareleads"
+msgid "agent type cannot be empty."
+msgstr "agent type cannot be empty."
+
+# GMT 1714549410.1341
+#, mobile
+msgctxt "shareleads"
+msgid "Agent Template : The notification will be triggered when the client adds agents unique code"
+msgstr "Agent Template : The notification will be triggered when the client adds agents unique code"
+
+# GMT 1714549410.1342
+#, mobile
+msgctxt "shareleads"
+msgid "Client Template : The notification will be triggered when new client wiil sign up"
+msgstr "Client Template : The notification will be triggered when new client wiil sign up"
+
+# GMT 1714549410.1343
+#, mobile
+msgctxt "shareleads"
+msgid "Email notifications"
+msgstr "Email notifications"
+
+# GMT 1714549410.1344
+#, mobile
+msgctxt "shareleads"
+msgid "customer cannot be empty."
+msgstr "customer cannot be empty."
+msgstr "Email notifications"
+
+# GMT 1714549410.1345
+#, mobile
+msgctxt "shareleads"
+msgid "Agent Name"
+msgstr "Agent Name"
+
+# GMT 1714549410.1346
+#, mobile
+msgctxt "shareleads"
+msgid "Clients List"
+msgstr "Clients List"
+
+# GMT 1714549410.1347
+#, mobile
+msgctxt "shareleads"
+msgid "Sent To"
+msgstr "Sent To"
+
+# GMT 1714549410.1348
+#, mobile
+msgctxt "shareleads"
+msgid "Subject"
+msgstr "Subject"
+
+# GMT 1714549410.1349
+#, mobile
+msgctxt "shareleads"
+msgid "Sent To"
+msgstr "Sent To"
+
+# GMT 1714549410.1350
+#, mobile
+msgctxt "shareleads"
+msgid "Sent At"
+msgstr "Sent At"
+
+# GMT 1714549410.1351
+#, mobile
+msgctxt "shareleads"
+msgid "Product deleted successfully."
+msgstr "Product deleted successfully."
+
+# GMT 1714549410.1352
+#, mobile
+msgctxt "shareleads"
+msgid "Your product is safe :)"
+msgstr "Your product is safe :)"
+
+# GMT 1714549410.1353
+#, mobile
+msgctxt "shareleads"
+msgid ""
+msgstr ""

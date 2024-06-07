@@ -1,0 +1,53 @@
+<ion-view class="shareleads-view l1" sb-page-background cache-view="false">
+    <ion-nav-title class="title title-center">
+        {{ ::shareleads.page_title | translate:"shareleads" }}
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!-- Right button content goes here -->
+        <button ng-if="!shareleads.is_admin && !is_loading && is_logged_in" type="button" class="button button-icon icon ion-person-add" ng-click="navigateTo('shareleads-invitation')">
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="shareleads">
+        <!-- <ion-refresher ng-show="is_logged_in" pulling-text="{{ ::'Pull to refresh...' | translate:'shareleads' }}" on-refresh="loadContent(true)"></ion-refresher> -->
+
+        <div class="card" ng-show="!is_logged_in">
+            <div class="item item-text-wrap padding-0">
+                <p class="text-center font-weight-bold">{{ ::"You must be logged in to use this feature." | translate:"shareleads" }}</p>
+                <div class="button-bar bar-stable m-top-10">
+                    <a class="button" ng-click="loginModalMP();">{{ ::"Click here to login" | translate:"shareleads" }}</a>
+                </div>
+            </div>
+        </div>
+		<div class="list list-inset" style="margin-bottom: 0px;" ng-if="!shareleads.is_admin && !is_loading && is_logged_in">
+			<label class="item item-input item-custom">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" ng-model="filter.c_search" placeholder="{{ ::'Search...' | translate:'shareleads' }}">
+			</label>
+			
+		</div>
+		<div class="list card" ng-if="!shareleads.is_admin && !is_loading && is_logged_in" ng-repeat="item in shareleads.contracts | filter:filter.c_search">
+			 <div class="item item-custom" ng-click="openContractDetails(item.contract_id)">
+				<h2>{{item.contract_title}}</h2>
+				<p>{{item.created_at}}</p>
+				<button class="button button-small button-assertive button-assertive-custom right-btn ion-android-download" ng-if="item.file!=''" ng-click="downloadFile(item.file)"></button>
+			</div>
+		</div>
+		<div class="list card" ng-if="!shareleads.is_admin && !is_loading && is_logged_in && shareleads.contracts.length=='0'">
+			 <div class="item item-custom">
+				{{ ::"Data not found" | translate:"shareleads" }}
+			</div>
+		</div>
+		<!-- admin section -->
+		<div ng-if="shareleads.is_admin && !is_loading && is_logged_in" ng-include="'./features/shareleads/assets/templates/l1/admin/blocks.html'"></div>
+		<!-- admin section end -->
+		<div style="margin-bottom: 30px;"></div>
+    </ion-content>
+	<style>
+		.right-btn{
+			position: absolute !important;
+			right: 8px;
+			top: 12px;
+			font-size: 15px !important;
+		}
+	</style>
+</ion-view>

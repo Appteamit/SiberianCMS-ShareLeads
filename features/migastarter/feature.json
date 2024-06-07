@@ -1,0 +1,28 @@
+{
+  "name": "Shareleads",
+  "code": "shareleads",
+  "version": "0.0.2",
+  "category": "integration",
+  "model": "Shareleads_Model_Setting",
+  "desktop_uri": "shareleads/application/",
+  "routes": [
+    {
+      "root": true,
+      "state": "shareleads-view",
+      "controller": "ShareleadsViewController",
+      "url": "shareleads/mobile_view/index/value_id/:value_id",
+      "template": "l1/view.html",
+      "cache": false
+    }
+  ],
+  "icons": [
+    "icons/shareleads1.png",
+    "icons/shareleads2.png",
+    "icons/shareleads3.png"
+  ],
+  "files": ["js/controllers/shareleads.js", "js/factory/shareleads.js"],
+  "is_ajax": true,
+  "compile": true,
+  "use_account": true,
+  "only_once": true
+}

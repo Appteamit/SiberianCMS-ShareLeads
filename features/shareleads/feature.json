@@ -1,0 +1,92 @@
+{
+  "name": "Shareleads",
+  "code": "shareleads",
+  "version": "0.0.2",
+  "category": "integration",
+  "model": "Shareleads_Model_Setting",
+  "desktop_uri": "shareleads/application/",
+  "routes": [
+    {
+      "root": true,
+      "state": "shareleads-view",
+      "controller": "ShareleadsViewController",
+      "url": "shareleads/mobile_view/index/value_id/:value_id",
+      "template": "l1/view.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-contract-details",
+      "controller": "ShareleadsContractDetailsController",
+      "url": "shareleads/mobile_view/contract/details/value_id/:value_id/contract_id/:contract_id",
+      "template": "l1/contract_details.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-invitation",
+      "controller": "ShareleadsInvitationController",
+      "url": "shareleads/mobile_view/invitations/value_id/:value_id",
+      "template": "l1/invitation.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-subscribers",
+      "controller": "ShareleadssubscriberController",
+      "url": "shareleads/mobile_view/subscribers/value_id/:value_id",
+      "template": "l1/admin/subscribers.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-share",
+      "controller": "ShareleadsShareController",
+      "url": "shareleads/mobile_view/share/value_id/:value_id",
+      "template": "l1/admin/share.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-shop",
+      "controller": "ShareleadsShopController",
+      "url": "shareleads/mobile_view/shop/value_id/:value_id",
+      "template": "l1/admin/shop.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-shop_details",
+      "controller": "ShareleadsShopDetailsController",
+      "url": "shareleads/mobile_view/shop_details/value_id/:value_id/product_id/:product_id",
+      "template": "l1/admin/shop_details.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-transactions",
+      "controller": "ShareleadsTransactionsController",
+      "url": "shareleads/mobile_view/transactions/value_id/:value_id",
+      "template": "l1/admin/transactions.html",
+      "cache": false
+    },
+    {
+      "root": true,
+      "state": "shareleads-myproducts",
+      "controller": "ShareleadsMyproductsController",
+      "url": "shareleads/mobile_view/myproducts/value_id/:value_id",
+      "template": "l1/admin/myproducts.html",
+      "cache": false
+    }
+  ],
+  "icons": [
+    "icons/shareleads1.png",
+    "icons/shareleads2.png",
+    "icons/shareleads3.png"
+  ],
+  "files": ["js/controllers/shareleads.js", "js/factory/shareleads.js","scss/shareleads.scss"],
+  "is_ajax": true,
+  "compile": true,
+  "use_account": true,
+  "only_once": true
+}

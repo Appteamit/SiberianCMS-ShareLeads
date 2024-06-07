@@ -1,0 +1,36 @@
+<ion-view class="shareleads-share l1" sb-page-background cache-view="false">
+    <ion-nav-title class="title title-center">
+        {{ ::shareleads.page_title | translate:"shareleads" }}
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!-- Right button content goes here -->
+        <!-- <button type="button" class="button button-icon icon ion-person-add" ng-click="navigateTo('shareleads-invitation')">
+        </button> -->
+    </ion-nav-buttons>
+    <ion-content class="shareleads">
+        <!-- <ion-refresher ng-show="is_logged_in" pulling-text="{{ ::'Pull to refresh...' | translate:'shareleads' }}" on-refresh="loadContent(true)"></ion-refresher> -->
+
+        <div class="card" ng-show="!is_logged_in">
+            <div class="item item-text-wrap padding-0">
+                <p class="text-center font-weight-bold">{{ ::"You must be logged in to use this feature." | translate:"shareleads" }}</p>
+                <div class="button-bar bar-stable m-top-10">
+                    <a class="button" ng-click="loginModalMP();">{{ ::"Click here to login" | translate:"shareleads" }}</a>
+                </div>
+            </div>
+        </div>
+		<div class="list card" ng-if="!is_loading">
+			<div class="item item-body item-custom">
+				<p ng-bind-html="trustedHTML(shareleads.text.share_text)"></p>
+			</div>
+		</div>
+		<div class="row" ng-if="!is_loading">
+			<div class="col">
+				<button class="button button-block button-positive button-positive-custom" ng-disabled="!shareleads.text.share_text" ng-click="shareText()">{{ ::"Share" | translate:"shareleads" }}</button>
+			</div>
+		</div>
+		<div style="margin-bottom: 30px;"></div>
+    </ion-content>
+	<style>
+		
+	</style>
+</ion-view>

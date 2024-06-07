@@ -1,0 +1,96 @@
+<ion-view
+  class="shareleads-transactions l1"
+  sb-page-background
+  cache-view="false"
+>
+  <ion-nav-title class="title title-center">
+    {{ ::shareleads.page_title | translate:"shareleads" }}
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <!-- Right button content goes here -->
+    <!-- <button type="button" class="button button-icon icon ion-person-add" ng-click="navigateTo('shareleads-invitation')">
+        </button> -->
+  </ion-nav-buttons>
+  <ion-content class="shareleads">
+    <!-- <ion-refresher ng-show="is_logged_in" pulling-text="{{ ::'Pull to refresh...' | translate:'shareleads' }}" on-refresh="loadContent(true)"></ion-refresher> -->
+
+    <div class="card" ng-show="!is_logged_in">
+      <div class="item item-text-wrap padding-0">
+        <p class="text-center font-weight-bold">
+          {{ ::"You must be logged in to use this feature." |
+          translate:"shareleads" }}
+        </p>
+        <div class="button-bar bar-stable m-top-10">
+          <a class="button" ng-click="loginModalMP();"
+            >{{ ::"Click here to login" | translate:"shareleads" }}</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="!is_loading">
+      <button
+        class="button button-block button-light button-light-custom"
+        style="
+          background: black;
+          color: white;
+          font-weight: bold;
+          font-size: large;
+          padding: 10px;
+        "
+      >
+        {{ ::"Available Points:" | translate:"shareleads" }} {{
+        shareleads.balance.balance_points }}
+      </button>
+    </div>
+    <div
+      class="list list-inset"
+      style="margin-bottom: 0px"
+      ng-if="!is_loading && is_logged_in"
+    >
+      <label class="item item-input item-custom">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input
+          type="text"
+          ng-model="filter.search"
+          placeholder="{{ ::'Search...' | translate:'shareleads' }}"
+        />
+      </label>
+    </div>
+    <div
+      class="list card"
+      ng-if="!is_loading && is_logged_in"
+      ng-repeat="item in shareleads.transactions | filter:filter.search"
+    >
+      <div class="item item-avatar item-custom">
+        <img
+          ng-if="item.transaction_type=='DEBIT'"
+          ng-src="{{shareleads.debit_icon}}"
+        />
+        <img
+          ng-if="item.transaction_type=='CREDIT'"
+          ng-src="{{shareleads.credit_icon}}"
+        />
+        <h2 ng-if="item.transaction_type=='DEBIT'">{{item.title}}</h2>
+        <h2 ng-if="item.transaction_type=='CREDIT'">{{item.client_name}}</h2>
+        <div class="row" style="padding-left: 0px">
+          <div class="col-67">{{item.created_at}}</div>
+          <div class="col-33" style="text-align: right">
+            <span ng-if="item.transaction_type=='DEBIT'">-</span>
+            <span ng-if="item.transaction_type=='CREDIT'">+</span>
+            {{item.points}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="list card"
+      ng-if="!is_loading && is_logged_in && shareleads.transactions.length=='0'"
+    >
+      <div class="item item-custom">
+        {{ ::"Data not found" | translate:"shareleads" }}
+      </div>
+    </div>
+    <div style="margin-bottom: 30px"></div>
+  </ion-content>
+  <style></style>
+</ion-view>
